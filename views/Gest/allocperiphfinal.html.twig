@@ -1,0 +1,48 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Affecter Périphérique - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+   Continuer le processus d'affectation de périphériques
+</div>
+<div class="panel-body">
+<h3>&nbsp&nbsp&nbspAllouer un(e) {{type}}</h3>
+
+{{ form_start(form) }}
+	
+	<div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.NumeroSerie, "Numero de série du périphérique (*Facultatif)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.NumeroSerie) }}
+
+		      </br><div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.NumeroSerie, {'attr': {'class': 'form-control'}}) }}
+		        	</div>
+
+	</div></br></br>
+	<div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.personnel, "Veuillez choisir une personne comme détenteur", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.personnel) }}
+
+		      </br><div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.personnel, {'attr': {'class': 'form-control'}}) }}
+		        	</div>
+
+		        	
+	</div></br></br></br>
+	<div class="row">
+		<input type="submit" value="Affecter" class="btn btn-primary col-sm-offset-3 col-sm-6"/>
+	</div>
+
+{{ form_end(form) }}
+
+</div>
+{% endblock %}

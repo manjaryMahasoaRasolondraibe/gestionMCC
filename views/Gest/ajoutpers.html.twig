@@ -1,0 +1,35 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Ajouter Personnel - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+{% include "McriGestBundle:Gest:flashbag.html.twig" %}
+
+<div class="panel-heading">
+   Veuillez séléctionner la direction sur laquelle sera affectée la personne
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/new.png') }}" width=57px class="ico"/>
+<h3 class="ico">Nouveau Personnel</h3></br></br>
+
+
+				{{ form_start(form) }}
+				<div class="form-group">
+				      {# Génération du label. #}
+				      {{ form_label(form.nomDir, "Direction sur laquelle sera rattachée cette personne", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+				      {# Affichage des erreurs pour ce champ précis. #}
+				      {{ form_errors(form.nomDir) }}
+
+				      <div class="col-sm-12">
+				        {# Génération de l'input. #}
+				        {{ form_widget(form.nomDir, {'attr': {'class': 'form-control'}}) }}
+				      </div></br></br>
+				    </div></br>
+				    
+				{{ form_end(form) }}
+
+		
+	</div>
+
+{% endblock %}

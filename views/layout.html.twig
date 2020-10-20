@@ -1,0 +1,37 @@
+{% extends "::layout.html.twig" %}
+	{% block title %} Gestion - {{ parent() }} {% endblock %}
+
+{% block body %}
+
+	<div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+					
+                     <h2 class="ico">Gestion du Parc Informatique MCRI</h2>   
+					 <img src="{{ asset ('assets/img/misanp.png') }}" width=180px class="icoright"/>
+         			
+                       	<p><a href="{{path('fos_user_change_password')}}">&nbsp;&nbsp;&nbsp;&nbsp;Cliquer ici pour changer votre mot de passe à tout moment</a></p>
+                	</div>
+                </div>
+                 <!-- /. ROW  -->
+            </div>
+	</div>
+
+
+ <div id="page-wrapper" >
+ <div id="page-inner">
+	<div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+					
+	{% block mcrigest_body %}
+	{% endblock %}
+					</div>
+				</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}

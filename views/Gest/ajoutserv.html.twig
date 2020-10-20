@@ -1,0 +1,99 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Ajouter Service - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+{% for message in app.session.flashbag.get('info') %}
+<div class="row">
+	<div class="flashbag col-sm-offset-3 col-sm-6">
+		<h5>{{ message }}</h5>
+	</div>
+</div>
+{% endfor %}
+
+<div class="panel-heading">
+   Formulaire d'ajout de service
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/new.png') }}" width=57px class="ico"/>
+<h3 class="ico">Nouveau Service</h3></br></br>
+
+<h5 align="center">Liste des services déja existants</h3>
+<div class="table-responsive">
+	
+	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+		<thead>
+			<tr align="center">
+				<th width="50%" height=30px>Direction</th>
+				<th width="50%">Nom Service</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for dirp in dir%}
+				<tr>
+					<td class="colImport"> {{dirp.NomDir}}  {% if dirp.AbrevDir is not null %} ({{dirp.AbrevDir}}) {% endif %}</td>
+					<td>
+						<ul>
+							{% for serv in dirp.Services%}
+									<li>
+										{{serv.NomServ}}  {% if serv.AbrevServ is not null %} ({{serv.AbrevServ}}) {% endif %}
+									</li>	
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+				
+			{% endfor %}	
+							
+		</tbody>
+	</table>
+</div></br>
+
+
+		{{ form_start(form) }}
+
+			<div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.dir, "Direction sur laquelle sera rattachée ce service", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.dir) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.dir, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+			<div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.nomServ, "Nom du nouveau service à ajouter", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.nomServ) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.nomServ, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.abrevServ, "Son Abréviation (*Facultatif)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.abrevServ) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.abrevServ, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+			<input type="submit" value="Affecter" class="btn btn-primary col-sm-offset-3 col-sm-6"/>
+		{{ form_end(form) }}
+
+</div>
+
+{% endblock %}

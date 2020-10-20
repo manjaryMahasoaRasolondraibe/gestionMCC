@@ -1,0 +1,84 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Ajouter Personnel - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+   Veuillez finir l'enregistrement
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/new.png') }}" width=57px class="ico"/>
+<h4 class="ico">Cette personne sera affecté dans la direction: {{selection}}</h4></br></br>
+		
+		{{ form_start(form2) }}
+				<div class="form-group">
+				      {# Génération du label. #}
+				      {{ form_label(form2.serv, "Service sur laquelle sera rattachée cette personne", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+				      {# Affichage des erreurs pour ce champ précis. #}
+				      {{ form_errors(form2.serv) }}
+
+				      <div class="col-sm-12">
+				        {# Génération de l'input. #}
+				        {{ form_widget(form2.serv, {'attr': {'class': 'form-control'}}) }}
+				      </div></br></br>
+				</div></br>
+
+				<div class="form-group">
+				      {# Génération du label. #}
+				      {{ form_label(form2.matricule, "Numero Matricule (*Facultatif)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+				      {# Affichage des erreurs pour ce champ précis. #}
+				      {{ form_errors(form2.matricule) }}
+
+				      <div class="col-sm-12">
+				        {# Génération de l'input. #}
+				        {{ form_widget(form2.matricule, {'attr': {'class': 'form-control'}}) }}
+				      </div></br></br>
+				    </div></br>
+
+				 <div class="form-group">
+				      {# Génération du label. #}
+				      {{ form_label(form2.nomPers, "Nom de la personne", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+				      {# Affichage des erreurs pour ce champ précis. #}
+				      {{ form_errors(form2.nomPers) }}
+
+				      <div class="col-sm-12">
+				        {# Génération de l'input. #}
+				        {{ form_widget(form2.nomPers, {'attr': {'class': 'form-control'}}) }}
+				      </div></br></br>
+				    </div></br>
+
+				 <div class="form-group">
+				      {# Génération du label. #}
+				      {{ form_label(form2.prenomPers, "Prénom(s) de la personne", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+				      {# Affichage des erreurs pour ce champ précis. #}
+				      {{ form_errors(form2.prenomPers) }}
+
+				      <div class="col-sm-12">
+				        {# Génération de l'input. #}
+				        {{ form_widget(form2.prenomPers, {'attr': {'class': 'form-control'}}) }}
+				      </div></br></br>
+				    </div></br>
+
+				 <div class="form-group">
+				      {# Génération du label. #}
+				      {{ form_label(form2.adressePers, "Adresse (*Facultatif)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+				      {# Affichage des erreurs pour ce champ précis. #}
+				      {{ form_errors(form2.adressePers) }}
+
+				      <div class="col-sm-12">
+				        {# Génération de l'input. #}
+				        {{ form_widget(form2.adressePers, {'attr': {'class': 'form-control'}}) }}
+				      </div></br></br>
+				    </div></br>
+				<input type="submit" value="Enregistrer et terminer" class="btn btn-primary col-sm-offset-3 col-sm-6"/>
+		{{ form_end(form2) }}
+		
+
+	</div>
+
+{% endblock %}

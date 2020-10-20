@@ -1,0 +1,42 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Ajouter un Type - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+{% include "McriGestBundle:Gest:flashbag.html.twig" %}
+{% for message in app.session.flashbag.get('erreur') %}
+	<div class="row">
+		<div class="alert alert-danger alert-dismissable">
+	    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <img src="{{ asset ('assets/img/warning.png') }}" width=32px class="ico"/>
+	    	<div class= "ico">{{ message }}</div>
+		</div>
+	</div>
+{% endfor %}
+<div class="panel-heading">
+   Ajouter un Nouveau Type de Périphérique ou de Composant
+</div>
+{{ form_start(form) }}
+<div class="panel-body">
+<img src="{{ asset ('assets/img/new.png') }}" width=57px class="ico"/>
+<h3 class="ico">Nouveau Type</h3></br></br>
+    <div class="form-group">
+        {{ form_label(form.libelletyp, "Libellée Type", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+        {{ form_errors(form.libelletyp) }}
+        <div class="col-sm-12">
+          {{ form_widget(form.libelletyp, {'attr': {'class': 'form-control'}}) }}
+        </div></br></br>
+    </div></br>
+
+    <div class="form-group">
+        {{ form_label(form.categ, "Pour quelle  catégorie de matériel?", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+        {{ form_errors(form.categ) }}
+        <div class="col-sm-12">
+          {# Génération de l'input. #}
+          {{ form_widget(form.categ, {'attr': {'class': 'form-control'}}) }}
+        </div></br></br></br>
+    </div></br>
+    {{ form_widget(form.save) }}
+{{ form_end(form) }}
+</div>
+
+{% endblock %}

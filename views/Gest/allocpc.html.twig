@@ -1,0 +1,54 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Affecter PC - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+{% include "McriGestBundle:Gest:flashbag.html.twig" %}
+
+<div class="panel-heading">
+   Liste en détail des PC complets disponible en STOCK
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/alloc.png') }}" width=57px class="ico"/>
+<h3 class="ico">Allocation de PC</h3></br></br>
+<div class="table-responsive">
+	
+		<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+			<thead>
+				<tr align="center">
+					<th width="12%" height=30px>Marque</th>
+					<th width="13%">Disque Dur</th>
+					<th width="12%">RAM</th>
+					<th width="14%">Processeur</th>
+					<th width="13%">Crt. Graph</th>
+					<th width="12%">Carte mère</th>
+					<th width="12%">Nb Restant</th>
+					<th  width="12%">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for pcp in pc %}
+			  {% if pcp.Nombre!=0 %}
+				<tr align="center">
+					<td width="12%" height=30px>{{pcp.Marque}}</td>
+					<td width="13%">{{pcp.Hdd}} Go</td>
+					<td width="12%">{{pcp.Ram}} Mo</td>
+					<td width="14%">{{pcp.Cpu}}</td>
+					<td width="13%">{{pcp.GpuCapacity}} Mo, {{pcp.Gpu}}</td>
+					<td width="12%">{{pcp.CarteMere}}</td>
+					<td width="12%">{{pcp.Nombre}}</td>
+					<td  width="12%"><a href="{{ path('mcri_allocpcfinal', { 'id': pcp.id } ) }}" class="btn btn-danger">Allouer / Affecter</a></td>
+				</tr>
+			  {% endif %}
+			{% endfor %}
+			</tbody>
+		</table>
+</div></br>		
+
+
+		
+
+	
+</div>
+{% endblock %}
+

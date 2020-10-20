@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			h3,h4 {color: #fd5d2b; text-decoration: underline;}
+		</style>
+	</head>
+	<body>
+		<h3 align="center">Fiche technique et Information sur un PC, MCRI</h3>
+		<p>Aujourd'hui: {{today|date("d/m/Y")}}</p>
+		<h4>Fiche techniques</h4>
+		<p>Numero de série: {{utiliz.NumeroSerie}}</p>
+		<p>Marque: {{pc.Marque}}</p>
+		<p>Disque Dur: {{pc.Hdd}} Go</p>
+		<p>RAM: {{pc.Ram}} Mo</p>
+		<p>Carte graphique: {{pc.GpuCapacity}} Mo, {{pc.Gpu}} </p>
+		<p>Carte Mère: {{pc.CarteMere}}</p>	
+		<p>Etat: {{utiliz.etat}}</p>
+		<p>Date d'allocation: {{utiliz.dateAlloc|date("d/m/Y")}}</p>
+		<h4>Information du personnel détenteur</h4>	
+		<p>Nom et Prénom (s): {{utiliz.personnel.nomPers}} {{utiliz.personnel.prenomPers}}</p>
+		<p>Numero Matricule: {% if utiliz.personnel.matricule is not null %} 
+								{{utiliz.personnel.matricule}}	
+							 {% else %}	
+							 	ECD					
+							 {% endif %}
+
+		</p>
+		<p>Service: {{utiliz.personnel.serv.nomServ}} {% if utiliz.personnel.serv.abrevServ is not null %} 
+														/ ( {{utiliz.personnel.serv.abrevServ}} )
+													  {% endif %}
+		</p>
+		<p>Direction: {{utiliz.personnel.serv.dir.nomDir}} {% if utiliz.personnel.serv.dir.abrevDir is not null %} 
+																/ ( {{utiliz.personnel.serv.dir.abrevDir}} )
+													  		{% endif %}
+		</p>
+		<h4>Actions antérieures faites sur ce PC</h4>
+		{% if utiliz.composants is not null %}
+		<p>Liste de composants changés sur ce PC:</p>
+			<ol>
+				{% for compchang in utiliz.composants %}
+					<li>
+						{{compchang.stock.type}} {{compchang.stock.marque}}: 
+
+						{% if compchang.NumeroSerie is not null %}
+							N°{{compchang.NumeroSerie}}, 
+						{% endif %}
+
+						{% if compchang.stock.capacite is not null %}
+							{{compchang.stock.capacite}},
+						{% endif %}
+
+						{% if compchang.stock.description is not null %}
+							{{compchang.stock.description}},
+						{% endif %}
+						du {{compchang.dateAlloc|date("d/m/Y")}}
+					</li>
+				{% endfor %}
+			</ol>
+		{% endif %}
+	</body>
+
+</html>

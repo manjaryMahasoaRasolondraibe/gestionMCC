@@ -1,0 +1,30 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Modifier Périphérique alloué - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+  Actions sur le Périphérique
+</div>
+<div class="panel-body">
+  <img src="{{ asset ('assets/img/alloc.png') }}" width=57px class="ico"/>
+  <img src="{{ asset ('assets/img/periph.png') }}" width=57px class="ico"/>
+  <h3 class="ico">Changer la détention du matériel: {{utiliz.stock.type}} {{utiliz.NumeroSerie}}</h3>
+
+ {{ form_start(form) }}
+	</br><div class="form-group">
+		
+
+		{# Affichage des erreurs pour ce champ précis. #}
+		{{ form_errors(form.personnel) }}
+
+		<div class="col-sm-12">
+			{# Génération de l'input. #}
+			{{ form_widget(form.personnel, {'attr': {'class': 'form-control'}}) }}
+		</div></br></br>
+	</div></br>
+
+  {{ form_end(form) }}
+
+</div>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Emmagasiner PC - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+   Emmagasiner des PC complets
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/save.png') }}" width=60px class="ico"/>
+<img src="{{ asset ('assets/img/pc.png') }}" width=60px class="ico"/>
+
+		{{ form_start(form) }}
+
+		     <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.DateEmmagasinage, "Date d'Emmagasinage (Aujourd'hui par défaut)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.DateEmmagasinage) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.DateEmmagasinage, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br></br>
+		    </div>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.Marque, "Marque du/des PC", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.Marque) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.Marque, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		     <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.Nombre, "Nombre des PC de ce type à emmagasiner", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.Nombre) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.Nombre, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.HDD, "Capacité du disque dur", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.HDD) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.HDD, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.RAM, "Mémoire vive RAM", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.RAM) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.RAM, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.CPU, "Type de processeur, ex: Intel Core 2 Duo 2Ghz", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.CPU) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.CPU, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		     <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.Gpu, "Type de la carte graphique", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.Gpu) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.Gpu, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.GpuCapacity, "Capacité de la carte graphique", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.GpuCapacity) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.GpuCapacity, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		     <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.CarteMere, "Type de la carte mère", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.CarteMere) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.CarteMere, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+
+    <a class="btn btn-primary col-sm-offset-3 col-sm-6" data-toggle="modal" data-target="#myModal">
+          Emmagasiner
+    </a>
+
+    <!--  Modals-->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                            	Confirmation
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+											                      Etes-vous sur que ces informations sont corrects?
+                                            Procéder à l'emmagasinage de PC?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" value="Emmagasiner" class="btn btn-primary col-sm-offset-3 col-sm-3"/>
+                                            <button type="button" class="btn btn-default col-sm-offset-3 col-sm-3" data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        <!-- End Modals-->
+        {{ form_end(form) }}
+	</div>
+
+
+{% endblock %}

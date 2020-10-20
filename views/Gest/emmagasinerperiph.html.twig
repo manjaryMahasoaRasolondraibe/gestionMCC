@@ -1,0 +1,108 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Emmagasiner Peripheriques - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+   Emmagasiner des Périphériques
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/save.png') }}" width=60px class="ico"/>
+<img src="{{ asset ('assets/img/periph.png') }}" width=60px class="ico"/>
+		{{ form_start(form) }}
+
+			<div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.DateEmmagasinage, "Date d'Emmagasinage (Aujourd'hui par défaut)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.DateEmmagasinage) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.DateEmmagasinage, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.Marque, "Marque du/des Peripherique(s)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.Marque) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.Marque, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		     <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.Nombre, "Nombre des Périphériques de ce type à emmagasiner", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.Nombre) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.Nombre, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		     <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.type, "Veuillez spécifier le type du/des périphérique(s)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.type) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.description, "Déscription (facultatif)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.description) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br></br></br>
+
+        <a class="btn btn-primary col-sm-offset-3 col-sm-6" data-toggle="modal" data-target="#myModal">
+              Emmagasiner
+        </a>
+
+        <!--  Modals-->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                	Confirmation
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+    											                      Etes-vous sur que ces informations sont corrects?
+                                                Procéder à l'emmagasinage de Périphérique (s)?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" value="Emmagasiner" class="btn btn-primary col-sm-offset-3 col-sm-3"/>
+                                                <button type="button" class="btn btn-default col-sm-offset-3 col-sm-3" data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            <!-- End Modals-->
+            {{ form_end(form) }}
+
+	</div>
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Vue des matériels alloués - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+{% include "McriGestBundle:Gest:flashbag.html.twig" %}
+
+<div class="panel-heading">
+   Détails des matériels afféctés
+</div>
+<div class="panel-body">
+
+<div class="icoright">
+	<img src="{{ asset ('assets/img/search.png') }}" width=25px class="ico"/>
+	<p class="ico" align="right">
+		<a data-toggle="modal" data-target="#myModal">
+        	Affichage avancée
+    	</a>
+	</p>
+</div>
+		<!--  Modals-->	
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                            	<img src="{{ asset ('assets/img/search.png') }}" width=25px class="ico"/>
+                                            	Affichage sur personnel respectif
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+											{{ form_start(form) }}
+												<div class="form-group">
+													{{ form_label(form.personnel, "Veuillez choisir un personnel", {'label_attr': {'class': 'col-sm-12 control-label'}}) }}
+													{{ form_errors(form.personnel) }}
+												</br><div class="col-sm-12">
+														{{ form_widget(form.personnel, {'attr': {'class': 'form-control'}}) }}
+													</div>
+												</div></br>	
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" value="Rechercher" class="btn btn-primary col-sm-offset-3 col-sm-6"/>
+                                            {{ form_end(form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        <!-- End Modals-->
+
+
+<img src="{{ asset ('assets/img/pc.png') }}" width=60px class="ico"/>
+<h3 class="ico">PC Complet</h3>
+
+	</br></br><div class="table-responsive">
+
+							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+								<thead>
+									<tr align="center">
+										<th width="9%" height=30px>Marque</th>
+										<th width="10%">N° série</th>
+										<th width="9%">Etat</th>
+										<th width="10%">Date alloc</th>
+										<th width="9%">HDD</th>
+										<th width="9%">RAM</th>
+										<th width="10%">CPU</th>
+										<th width="10%">Ct Graph</th>
+										<th width="8%">C.M</th>
+										<th width="10%">Détenteur</th>
+										<th width="6%">Act°</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for ordip in ordi %}
+										<tr align="center">
+											<td width="9%" height=30px>{{ordip.marque}}</td>
+											<td width="10%">{{ordip.ns}}</td>
+											{% if ordip.etat!='fonctionnel' %}
+												<td width="9%" style="color : red; font-weight: bold;">{{ordip.etat}}</td>
+											{% else %}
+												<td width="9%">{{ordip.etat}}</td>
+											{% endif %}
+											<td width="10%">{{ordip.dateAlloc|date("d/m/Y")}}</td>
+											<td width="9%">{{ordip.hdd}} Go</td>
+											<td width="9%">{{ordip.ram}} Mo</td>
+											<td width="10%">{{ordip.cpu}}</td>
+											<td width="10%">{{ordip.graphcap}} Mo, {{ordip.graph}}</td>
+											<td width="8%">{{ordip.cm}}</td>
+											<td width="10%">
+												{% if ordip.datenewdet is null %}
+													{{ordip.detenteur}}
+												{% else %}
+													{{ordip.detenteur}} (nouveau détenteur du {{ordip.datenewdet|date("d/m/Y")}}
+													 						{% if ordip.causenewdet is not  null %}
+													 							,CAUSE: {{ordip.causenewdet}}
+													 						{% endif %}
+													 					)
+												{% endif %}
+											</td>
+											<td class="miavaka" width="6%">
+												<a href="{{ path('mcri_actionpc', { 'id': ordip.id } ) }}"><img src="{{ asset ('assets/img/setting.png') }}" width=35px/></a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+	</div></br>
+
+<img src="{{ asset ('assets/img/composant.png') }}" width=65px class="ico"/>
+<h3 class="ico">Composants</h3>
+</br></br><div class="table-responsive">
+
+							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+								<thead>
+									<tr align="center">
+										<th width="12%">Type</th>
+										<th width="12%">Marque</th>
+										<th width="12%">N° Série</th>
+										<th width="12%">Date remplaç.</th>
+										<th width="12%">Description</th>
+										<th width="12%">Capacité</th>
+										<th width="14%">PC propriétaire</th>
+										<th width="14%">Détenteur</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for composp in compos %}
+									<tr align="center" >
+										<td width="12%">{{composp.t}}</td>
+										<td width="12%">{{composp.marque}}</td>
+										<td width="12%">{{composp.ns}}</td>
+										<td width="12%">{{composp.dateAlloc|date("d/m/Y")}}</td>
+										<td width="12%">
+											{% if composp.description is null %}
+												Non précisée
+											{% else %}
+												{{composp.description}}
+											{% endif %}
+										</td>
+										<td width="12%">
+											{% if composp.capacite is null %}
+												Non précisée
+											{% else %}
+												{{composp.capacite}}
+											{% endif %}
+										</td>
+										<td width="14%">{{composp.pcprop}}</td>
+										<td width="14%">{{composp.detenteur}}</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+</div></br>
+
+
+<img src="{{ asset ('assets/img/periph.png') }}" width=65px class="ico"/>
+<h3 class="ico">Périphériques</h3>
+	</br></br><div class="table-responsive">
+
+							<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+								<thead>
+									<tr align="center">
+										<th width="15%" height=30px>Matériels</th>
+										<th width="15%">Etat</th>
+										<th width="15%">Marque</th>
+										<th width="17%">Numero de série</th>
+										<th width="15%">Date d'allocation</th>
+										<th width="17%">Détenteur</th>
+										<th width="6%">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for matp in mat %}
+									<tr align="center">
+										<td width="15%" height=30px>{{ matp.t }}</td>
+										<td width="15%">{{ matp.etat }}</td>
+										<td width="15%">{{ matp.marque }}</td>
+										<td width="17%">{{ matp.ns }}</td>
+										<td width="15%">{{ matp.dateAlloc|date("d/m/Y") }}</td>
+										<td width="17%">
+											{% if matp.datenewdet is null %}
+												{{matp.detenteur}}
+											{% else %}
+												{{matp.detenteur}} (nouveau détenteur du {{matp.datenewdet|date("d/m/Y")}})
+											{% endif %}
+										</td>
+										<td class="miavaka" width="6%">
+												<a href="{{ path('mcri_actionperiph', { 'id': matp.id } ) }}"><img src="{{ asset ('assets/img/setting.png') }}" width=35px/></a>
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+	</div>
+</div>
+
+{% endblock %}

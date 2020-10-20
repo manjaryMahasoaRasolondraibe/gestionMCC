@@ -1,0 +1,76 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Affecter PC - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+   Veuillez continuer l'allocation de PC ici
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/pc.png') }}" width=57px class="ico"/>
+
+	<div id="page-inner">
+		<div class="row">
+	        <div class="col-lg-5">
+	            <!-- Advanced Tables -->
+	            <div class="panel panel-default">
+	            	<div class="panel-heading">
+   						Caractéristiques du PC
+					</div>
+					<div class="panel-body">
+						<p>Marque: {{pc.Marque}}</p>
+						<p>Disque Dur: {{pc.Hdd}} Go</p>
+						<p>RAM: {{pc.Ram}} Mo</p>
+						<p>Carte graphique: {{pc.GpuCapacity}} Mo, {{pc.Gpu}} </p>
+						<p>Carte Mère: {{pc.CarteMere}}</p>	
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-7">
+				<!-- Advanced Tables -->
+				<div class="panel panel-default">
+	            	<div class="panel-heading">
+   						Informations
+					</div>
+					<div class="panel-body">
+
+						{{ form_start(form) }}
+
+							<div class="form-group">
+						      {# Génération du label. #}
+						      {{ form_label(form.NumeroSerie, "Numero de série du PC", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+						      {# Affichage des erreurs pour ce champ précis. #}
+						      {{ form_errors(form.NumeroSerie) }}
+
+						      <div class="col-sm-12">
+						        {# Génération de l'input. #}
+						        {{ form_widget(form.NumeroSerie, {'attr': {'class': 'form-control'}}) }}
+						      </div></br></br></br></br>
+						    </div></br>
+
+						    <div class="form-group">
+						      {# Génération du label. #}
+						      {{ form_label(form.personnel, "Détenteur", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+						      {# Affichage des erreurs pour ce champ précis. #}
+						      {{ form_errors(form.personnel) }}
+
+						      <div class="col-sm-12">
+						        {# Génération de l'input. #}
+						        {{ form_widget(form.personnel, {'attr': {'class': 'form-control'}}) }}
+						      </div></br></br></br></br>
+						    </div></br>
+
+							<input type="submit" value="Affecter" class="btn btn-primary col-sm-offset-3 col-sm-6"/>
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+</div>
+
+{% endblock %}

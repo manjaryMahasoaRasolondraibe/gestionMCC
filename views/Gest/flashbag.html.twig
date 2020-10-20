@@ -1,0 +1,9 @@
+{% for message in app.session.flashbag.get('info') %}
+	<div class="row">
+		<div class="alert alert-success alert-dismissable">
+	    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<img src="{{ asset ('assets/img/success.png') }}" width=32px class="ico"/>
+	    	<div class= "ico">{{ message }}</div>
+		</div>
+	</div>
+{% endfor %}

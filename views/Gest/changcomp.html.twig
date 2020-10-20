@@ -1,0 +1,26 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Changer Composant de PC - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+   Confirmation
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/info.png') }}" width=50px class="ico"/>
+<h3 class="ico">Changer {{comp.Type}} du PC {{utiliz.NumeroSerie}}, Confirmer?</h3></br></br>
+
+	{{ form_start(form) }}
+
+		<div class="form-group">
+			{{ form_label(form.NumeroSerie, "Numero de série du nouveau composant (*Facultatif)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+			{{ form_errors(form.NumeroSerie) }}
+			<div class="col-sm-12">
+				{{ form_widget(form.NumeroSerie, {'attr': {'class': 'form-control'}}) }}
+			</div></br></br>
+		</div></br>
+
+	{{ form_end(form) }}
+</div>
+
+{% endblock %}

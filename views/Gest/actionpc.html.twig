@@ -1,0 +1,228 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Modifier PC alloué - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+<div class="panel-heading">
+  Actions sur le PC
+</div>
+<div class="panel-body">
+<img src="{{ asset ('assets/img/pc.png') }}" width=57px class="ico"/>
+<h3 class="ico">Modification</h3>
+
+	<div id="page-inner">
+		<div class="row">
+	        <div class="col-lg-6">
+	            <!-- Advanced Tables -->
+	            <div class="panel panel-default">
+	            	<div class="panel-heading">
+   						Caractéristiques du PC
+					</div>
+					<div class="panel-body">
+					
+					<p style="font-weight : bold;">Numéro de série: {{utiliz.NumeroSerie}}</p>
+						<ul>
+							<li>Marque: {{pc.Marque}}</li>
+							<li>Disque Dur: {{pc.Hdd}} Go</li>
+							<li>RAM: {{pc.Ram}} Mo</li>
+							<li>Carte graphique: {{pc.GpuCapacity}} Mo, {{pc.Gpu}} </li>
+							<li>Carte Mère: {{pc.CarteMere}}</li>
+							<li style="font-weight : bold;">
+								Etat: {{ utiliz.etat }}
+							</li>
+						</ul>
+								{% if utiliz.composants is not null %}
+										<ol style="font-weight : bold;">
+										{% for compchang in utiliz.composants %}
+											<li>{{compchang.stock.type}} {{compchang.stock.marque}}: N°{{compchang.NumeroSerie}}, {{compchang.stock.capacite}}, {{compchang.stock.description}} / Changé (e)
+											</li>
+										{% endfor %}
+										</ol>
+								{% endif %}
+							
+						  </br>
+	
+
+              				{% if utiliz.etat=='fonctionnel' %}
+              						<a class="btn btn-warning col-sm-5" data-toggle="modal" data-target="#etatmodal">
+						  				Déclarer défectueux
+						  			</a>
+              				{% else %}
+              						<a class="btn btn-success col-sm-5" data-toggle="modal" data-target="#etatmodal">
+						  				Redéclarer fonctionnel
+						  			</a>
+              				{% endif %}
+        					
+
+        					<!--  Modals-->	
+	                            <div class="modal fade" id="etatmodal" tabindex="-1" role="dialog"  aria-hidden="true">
+	                                <div class="modal-dialog">
+	                                    <div class="modal-content">
+
+	                    {{ form_start(form) }}
+
+	                                        <div class="modal-header">
+	                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                                            <h4 class="modal-title" id="myModalLabel">
+	                                            	Confirmation
+	                                            </h4>
+	                                        </div>
+	                                        <div class="modal-body">
+		                                        {% if utiliz.etat=='fonctionnel' %}
+														<div class="form-group">
+															{{ form_label(form.etat, "Indiquez brièvement le problème", {'label_attr': {'class': 'col-sm-12 control-label'}}) }}
+															{{ form_errors(form.etat) }}
+															<div class="col-sm-12">
+																{{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+															</div></br>
+														</div>
+												{% else %}
+													<div class="form-group">
+															<div style="display : none;">
+																{{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+															</div>
+														</div>
+													Voulez vous vraiment déclarer ce PC fonctionnel à nouveau?
+												{% endif %}	
+	                                        </div>
+
+	                                        <div class="modal-footer">
+	                                            {{ form_widget(form.etatbtn) }}
+	                                            <button type="button" class="btn btn-default col-sm-offset-3 col-sm-3" data-dismiss="modal">Fermer</button>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+        					<!-- End Modals-->
+
+        				
+        					{{ form_widget(form.print) }}
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<!-- Advanced Tables -->
+				<div class="panel panel-default">
+	            	<div class="panel-heading">
+   						Changer Détenteur
+					</div>
+					<div class="panel-body">
+						
+						    <div class="form-group">
+						      {# Génération du label. #}
+						      {{ form_label(form.personnel, "Détenteur", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+						      {# Affichage des erreurs pour ce champ précis. #}
+						      {{ form_errors(form.personnel) }}
+
+						      <div class="col-sm-12">
+						        {# Génération de l'input. #}
+						        {{ form_widget(form.personnel, {'attr': {'class': 'form-control'}}) }}
+						      </div></br></br></br>
+						    </div></br>
+
+							<div class="form-group">
+						      {# Génération du label. #}
+						      {{ form_label(form.causeNewDet, "Cause du changement de détention", {'label_attr': {'class': 'col-sm-12 control-label'}}) }}
+
+						      {# Affichage des erreurs pour ce champ précis. #}
+						      {{ form_errors(form.causeNewDet) }}
+
+						      <div class="col-sm-12">
+						        {# Génération de l'input. #}
+						        {{ form_widget(form.causeNewDet, {'attr': {'class': 'form-control'}}) }}
+						      </div></br></br></br>
+						    </div></br></br>
+						    <a class="btn btn-primary col-sm-5" data-toggle="modal" data-target="#myModal">
+          						Modifier
+    						</a>
+						    {{ form_widget(form.Delete) }}
+
+		<!--  Modals-->	
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                            	Confirmation
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+											Etes vous sûr de vouloir modifier le détenteur?	
+                                        </div>
+                                        <div class="modal-footer">
+                                            {{ form_widget(form.Edit) }}
+                                            <button type="button" class="btn btn-default col-sm-offset-3 col-sm-3" data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        <!-- End Modals-->
+
+
+
+
+
+						{{ form_end(form) }}
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+	            <!-- Advanced Tables -->
+	            <div class="panel panel-default">
+	            	<div class="panel-heading">
+   						Changer un composant (Liste en détail des composants disponibles en STOCK)
+					</div>
+					<div class="panel-body">
+						<img src="{{ asset ('assets/img/changcomp.png') }}" width=50px class="ico"/>
+						<h3 class="ico">Changer Composant du PC {{utiliz.NumeroSerie}}</h3>
+
+						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+								<thead>
+									<tr align="center">
+										<th width="20%" height=30px>Type</th>
+										<th width="20%">Marque</th>
+										<th width="20%">Capacité</th>
+										<th width="20%">Déscription</th>
+										<th width="10%">Nb dispo</th>
+										<th width="10%">Changer</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for compp in comp %}
+								  	{% if compp.nombre!=0 %}
+										<tr align="center">
+											<td width="20%" height=30px>{{ compp.type }}</td>
+											<td width="20%">{{ compp.marque }}</td>
+											<td width="20%">{{ compp.capacite }}</td>
+											<td width="20%">{{ compp.description }}</td>
+											<td width="10%">{{ compp.nombre }}</td>
+											<td width="10%">
+												<a href="{{ path('mcri_changcomp', { 'id': utiliz.id , 'idcomp': compp.id }  ) }}" class="btn btn-danger">
+													<i class=" fa fa-refresh "></i>Changer
+												</a>
+											</td>
+										</tr>
+								  	{% endif %}
+								{% endfor %}
+								</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "McriGestBundle::layout.html.twig" %}
+{% block title %} Ajouter Direction - {{ parent() }} {% endblock %}
+
+{% block mcrigest_body %}
+
+{% include "McriGestBundle:Gest:flashbag.html.twig" %}
+
+	<div class="panel-heading">
+   		Formulaire d'ajout de direction
+	</div>
+	<div class="panel-body">
+		<img src="{{ asset ('assets/img/new.png') }}" width=57px class="ico"/>
+		<h3 class="ico">Nouvelle Direction</h3></br></br>
+
+		<div class="row">
+			<div class="col-lg-12">
+	            <!-- Advanced Tables -->
+	            <div class="panel panel-default">
+	            	<div class="panel-heading">
+   						Liste des directions déja existantes
+					</div>
+					<div class="panel-body">
+						<ul>
+							{% for dirp in dir %}
+								<li>
+									{{dirp.NomDir}} /  {{dirp.AbrevDir}}
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		{{ form_start(form) }}
+
+			<div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.nomDir, "Nom de la nouvelle Direction à ajouter", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.nomDir) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.nomDir, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+		    <div class="form-group">
+		      {# Génération du label. #}
+		      {{ form_label(form.abrevDir, "Son Abréviation (*Facultatif)", {'label_attr': {'class': 'col-sm-5 control-label'}}) }}
+
+		      {# Affichage des erreurs pour ce champ précis. #}
+		      {{ form_errors(form.abrevDir) }}
+
+		      <div class="col-sm-12">
+		        {# Génération de l'input. #}
+		        {{ form_widget(form.abrevDir, {'attr': {'class': 'form-control'}}) }}
+		      </div></br></br>
+		    </div></br>
+
+			<input type="submit" value="Affecter" class="btn btn-primary col-sm-offset-3 col-sm-6"/>
+		{{ form_end(form) }}
+
+	</div>
+
+{% endblock %}
